@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+!/usr/bin/env python
 # -----------------------------------------------------------------------------
 # Multi-layer perceptron
 # Copyright (C) 2011  Nicolas P. Rougier
@@ -109,17 +109,16 @@ if __name__ == '__main__':
             network.propagate_backward( samples['output'][n], lrate, momentum )
         # Test
         for i in range(samples.size):
-            o = network.propagate_forward( samples['input'][i] )
-            print i, samples['input'][i], '%.2f' % o[0],
-            print '(expected %.2f)' % samples['output'][i]
-        print
+            o = network.propagate_forward(samples['input'][i] )
+            print(i, samples['input'][i], '%.2f' % o[0])
+            print('(expected %.2f)' % samples['output'][i])
 
     network = MLP(2,2,1)
     samples = np.zeros(4, dtype=[('input',  float, 2), ('output', float, 1)])
 
     # Example 1 : OR logical function
     # -------------------------------------------------------------------------
-    print "Learning the OR logical function"
+    print("Learning the OR logical function")
     network.reset()
     samples[0] = (0,0), 0
     samples[1] = (1,0), 1
@@ -129,7 +128,7 @@ if __name__ == '__main__':
 
     # Example 2 : AND logical function
     # -------------------------------------------------------------------------
-    print "Learning the AND logical function"
+    print("Learning the AND logical function")
     network.reset()
     samples[0] = (0,0), 0
     samples[1] = (1,0), 0
@@ -139,7 +138,7 @@ if __name__ == '__main__':
 
     # Example 3 : XOR logical function
     # -------------------------------------------------------------------------
-    print "Learning the XOR logical function"
+    print("Learning the XOR logical function")
     network.reset()
     samples[0] = (0,0), 0
     samples[1] = (1,0), 1
@@ -149,7 +148,7 @@ if __name__ == '__main__':
 
     # Example 4 : Learning sin(x)
     # -------------------------------------------------------------------------
-    print "Learning the sin function"
+    print("Learning the sin function")
     network = MLP(1,10,1)
     samples = np.zeros(500, dtype=[('x',  float, 1), ('y', float, 1)])
     samples['x'] = np.linspace(0,1,500)
@@ -169,4 +168,4 @@ if __name__ == '__main__':
         y[i] = network.propagate_forward(x[i])
     plt.plot(x,y,color='r',lw=3)
     plt.axis([0,1,0,1])
-    plt.show()
+plt.show()
