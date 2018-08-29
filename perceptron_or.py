@@ -17,15 +17,15 @@ from numpy import array, dot, random
 
 training_data = [
     (array([0,0]), 0),
-    (array([0,1]), 0),
-    (array([1,0]), 0),
+    (array([0,1]), 1),
+    (array([1,0]), 1),
     (array([1,1]), 1),
 ]
 
 test_data = [
     (array([0,0]), 0),
-    (array([0,1]), 0),
-    (array([1,0]), 0),
+    (array([0,1]), 1),
+    (array([1,0]), 1),
     (array([1,1]), 1),
 ]
 # Define variável peso com valores aleatorios
