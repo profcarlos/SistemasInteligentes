@@ -3,7 +3,7 @@
 # 
 # Objetivo: Comandos básicos para leitura de arquivos de dados para
 #           inserção de dados na Rede Neural de Múltiplas Camadas.
-#           Exemplo feito a partir da base de dados glass
+#           Exemplo feito a partir da base de dados horse_colic
 #           http://ftp.ics.uci.edu/pub/machine-learning-databases/horse-colic/
 #-----------------------------------------------------------------------
 import numpy
