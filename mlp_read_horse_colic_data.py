@@ -54,14 +54,10 @@ def main():
     # Use o join para criar o caminho completo
     caminho = os.path.join(dir, file)
     print('Nome do arquivo : %s\n'% caminho)
-    # Use o load.txt da biblioteca numpy para ler e salvar os dados do arquivo
-    # Conheça as possibilidades do comando em
-    # https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.loadtxt.html
-    # O delimiter representa o símbolo utilizado para delimitar os atributos
-    # Veja que alguns arquivos .data usam espaço
     # Arquivos .data com dados ausentes (?) pode ser usado o numpy.genfromtxt pois o
     # numpy.loadtxt pode dar erro devido caractere inválido, veja em:
     # https://docs.scipy.org/doc/numpy/reference/generated/numpy.genfromtxt.html
+    # Aqui vamos substituir o "?" pelo valor -999
     DATA = numpy.genfromtxt(caminho, delimiter = ' ', missing_values = ('?'), filling_values = ('-999'))
     print('Dados do arquivo:')
     n_samp = len(DATA)
