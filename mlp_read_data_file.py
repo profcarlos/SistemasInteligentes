@@ -118,12 +118,6 @@ def main():
             DOUT_TS.append(DOUT[i])            
     print('samples training:', len(DINP_TR))
     print('samples test: ', len(DINP_TS))        
-            
-        
-    
-    # Seleciona dados de treinamento e dados de teste
-    
-   
         
 if __name__ == "__main__":
     main()
