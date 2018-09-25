@@ -6,6 +6,7 @@
 # Distributed under the terms of the BSD License.
 # -----------------------------------------------------------------------------
 import numpy as np
+import time
 
 def fromdistance(fn, shape, center=None, dtype=float):
     def distance(*args):
@@ -95,6 +96,7 @@ if __name__ == '__main__':
         plt.axis([0,1,0,1])
         plt.xticks([]), plt.yticks([])
         plt.show()
+        time.sleep(5)
 
     # Example 1: 2d uniform distribution (1d)
     # -------------------------------------------------------------------------
