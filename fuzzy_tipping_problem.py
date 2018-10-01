@@ -45,7 +45,9 @@ We would formulate this problem as:
       * the quality as 6.5,
    - it would recommend I leave:
       * a 20.2% tip.
-
+* Install
+   - In Spider use: !pip install -U scikit-fuzzy
+   - In python IDLE use: pip install -U scikit-fuzzy in c:\python34\scripts folder
 
 Creating the Tipping Controller Using the skfuzzy control API
 -------------------------------------------------------------
