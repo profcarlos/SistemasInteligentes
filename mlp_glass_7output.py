@@ -171,7 +171,7 @@ def remap( x, oMin, oMax, nMin, nMax ):
 
     return result
 
-def learn(network,samples, epochs=1000000, lrate=.4, momentum=0.2):
+def learn(network,samples, epochs=1000000, lrate=0.2, momentum=0.1):
     MSE = 1
     it = 0
     stop = 0.001
@@ -179,35 +179,38 @@ def learn(network,samples, epochs=1000000, lrate=.4, momentum=0.2):
     # Fase de Treinamento
     #print('--------- Fase de Treinamento')
     # O treinamento é realizado enquanto o MSE > 0.01 e o número de iterações não ultrapassou epochs
-    while (MSE > stop and it < epochs):
+    while (numpy.mean(MSE) > stop and it < epochs):
         n = numpy.random.randint(samples.size)
         network.propagate_forward( samples['input'][n] )
         network.propagate_backward( samples['output'][n], lrate, momentum )
         #print(samples[n])
         # Avalia o erro quadrático médio a cada 10 iterações
         if(it%1000 == 0 and it > 0):
-            MSE = numpy.mean(network.calc_error(samples))
+            MSE = network.calc_error(samples)
             print('--------- Iteração: ', it, 'MSE :', MSE)
             #print('------ Parada de Treinamento!')
             #sys.exit()
-            ITER.append([it, MSE])
+            ITER.append([it, numpy.mean(MSE)])
         it += 1
         #print('------ Parada de Treinamento!')
         #sys.exit()
     numpy.savetxt('c:\\carlos\\iter_data.csv', ITER, delimiter = ',', fmt = ['%d', '%.2f'])
     # Fase de Testes
     #print('------ Fase de Testes')
-    acertos = 0
+    n_acertos = 0
     erros = numpy.zeros(len(samples['output'][0]))
+    acertos = numpy.zeros(len(samples['output'][0]))
     for i in range(samples.size):
         out = network.propagate_forward(samples['input'][i] )
         if(numpy.argmax(samples['output'][i]) == numpy.argmax(out) ):
-            acertos = acertos + 1
+            n_acertos = n_acertos + 1
+            acertos[numpy.argmax(samples['output'][i])] += 1
         else:
             erros[numpy.argmax(samples['output'][i])] += 1
     print('----------------------------------------')
-    print('acertos: ', acertos, ' de ', len(samples))
-    print('erros:', erros)
+    print('n_acertos: ', n_acertos, ' de ', len(samples))
+    print('acertos:', acertos)
+    print('erros:  ', erros)
 
 
 def main():
@@ -230,7 +233,7 @@ def main():
     # Extrai as entradas (9 atributos)
     DINP = numpy.zeros((n_samp, n_atr-2))
     # Extrai a saída (1 padrão)
-    DOUT = numpy.zeros((n_samp,7))
+    DOUT = 0.1*numpy.ones((n_samp,7))
     
     #-------------------------------------------------------------------------
     # Informações sobre os limites dos atributos em glass.data
@@ -262,7 +265,7 @@ def main():
         #sys.exit()
         DOUT[i][int(DMAP[i][10]-1)] = 1
         print(DMAP[i])
-       	print(DINP[i])
+        print(DINP[i])
         print(DOUT[i])        
         print('------')
     # Cria array de entrada e saída
@@ -283,13 +286,13 @@ def main():
             
     # Define a configuração da rede MLP
     # Configuração topológica da RNA. Se (9, 12, 1) possui 9 neurônios de entrada, 12 ocultos e 1 de saída
-    network = MLP(9, 12,  7)
+    network = MLP(9, 7)
     samples = numpy.zeros(n_tr, dtype=[('input',  float, 9), ('output', float, 7)])
     for i in range(n_tr):
         samples['input'][i]  = DINP_TR[i]
         samples['output'][i] = DOUT_TR[i]
-        print('i: ',samples['input'][i], 'o:', samples['output'][i])
-
+        print('i: ',samples['input'][i], 'o:', numpy.argmax(samples['output'][i]))
+        
     #sys.exit()
     learn(network, samples)
         
