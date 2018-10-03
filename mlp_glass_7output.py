@@ -286,7 +286,7 @@ def main():
             
     # Define a configuração da rede MLP
     # Configuração topológica da RNA. Se (9, 12, 1) possui 9 neurônios de entrada, 12 ocultos e 1 de saída
-    network = MLP(9, 7)
+    network = MLP(9, 63, 7)
     samples = numpy.zeros(n_tr, dtype=[('input',  float, 9), ('output', float, 7)])
     for i in range(n_tr):
         samples['input'][i]  = DINP_TR[i]
@@ -294,6 +294,7 @@ def main():
         print('i: ',samples['input'][i], 'o:', numpy.argmax(samples['output'][i]))
         
     #sys.exit()
+    network.reset()
     learn(network, samples)
         
 if __name__ == "__main__":
