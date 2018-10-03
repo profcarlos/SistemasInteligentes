@@ -281,6 +281,7 @@ def main():
         print('i: ',samples['input'][i], 'o:', samples['output'][i])
 
     #sys.exit()
+    network.reset()
     learn(network, samples)
         
 if __name__ == "__main__":
