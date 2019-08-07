@@ -2,9 +2,7 @@
 Curso: Engenharia Elétrica
 Disciplina: Sistemas Inteligentes
 Professor: Carlos Roberto Jr
-
 Título: Algoritmo do perceptron para duas entradas
-
 Observações:
 Aprender uma lógica OR para o algoritmo é mais fácil do que aprender uma lógica AND.
 Nos testes com logica AND são muitas iterações e não obtem um MSE satisfatório. O que pode ser feito para solucionar?
@@ -37,16 +35,16 @@ STOP = 0.01
 # Cria variável para contar iterações
 it = 0
 # Cria a variável do erro quadrático médio
-MSE = 0
+MSE = float(0.0)
 # Cria a função degrau unitário
-unit_step = lambda x: 0 if x <= 0 else 1
+unit_step = lambda x: 0 if x <= 0.0 else 1
 # Fase de Treinamento
 print('------Fase de Treinamento')
 # Realiza o laço enquanto MSE é alto ou se é a primeira iteração
 while MSE > STOP or it == 0:
     it = it + 1
     print('---------- Iteration: ',it)
-    for i in range(12):
+    for i in range(3):
         # Seleciona uma amostra aleatória da base de dados
         x, d = x, d = choice(training_data)
         # Realiza a operação de soma do perceptron
@@ -58,15 +56,11 @@ while MSE > STOP or it == 0:
         # Realiza o ajuste dos pesos do perceptron
         w += a * e * x
         # Imprime os dados
-        print('x:')
-        print(x)
-        print('w:')
-        print(w)
-        print('y:')
-        print(y)
-        print('e:')
-        print(e)
-    # Apos treinar com toda base de dados calcula o MSE    
+        # Apresenta os resultados 
+        print("{}: {} -> {} \t [e = {}]".format(x, sum, y, e))
+    # Apos treinar com toda base de dados calcula o MSE
+    print('--- Calcula o erro quadrático médio')
+    MSE = 0
     for i in range(4):
         # Seleciona uma amostra sequencial da base de dados
         x, d = training_data[i]
@@ -78,11 +72,12 @@ while MSE > STOP or it == 0:
         e = d - y
         # Calcula o erro quadrático médio
         MSE = MSE + e*e
+        # Apresenta os resultados 
+        print("{}: {} -> {} \t [e = {}, MSE = {}]".format(x, sum, y, e, MSE))
     # O erro quadrático médio é multiplicado por 1/2
-    MSE = (1/2)*MSE
-    # Imprime o MSE
-    print('--- Calcula o erro quadrático médio')
-    print('MSE = %f' %MSE)
+    MSE = MSE*0.5
+    print("MSE = {}".format(MSE))
+
 # Fase de Testes
 print('--------- Fase de Testes')
 # Para cada amostra da base de treinamento
