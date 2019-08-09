@@ -17,14 +17,14 @@ training_data = [
     (array([0,0]), 0),
     (array([0,1]), 1),
     (array([1,0]), 1),
-    (array([1,1]), 1),
+    (array([1,1]), 0),
 ]
 
 test_data = [
     (array([0,0]), 0),
     (array([0,1]), 1),
     (array([1,0]), 1),
-    (array([1,1]), 1),
+    (array([1,1]), 0),
 ]
 # Define variável peso com valores aleatorios
 w = random.rand(2)/2 -0.5
@@ -37,14 +37,14 @@ it = 0
 # Cria a variável do erro quadrático médio
 MSE = float(0.0)
 # Cria a função degrau unitário
-unit_step = lambda x: 0 if x <= 0.0 else 1
+unit_step = lambda x: 0 if x <= 0.4 else 1
 # Fase de Treinamento
 print('------Fase de Treinamento')
 # Realiza o laço enquanto MSE é alto ou se é a primeira iteração
 while MSE > STOP or it == 0:
     it = it + 1
     print('---------- Iteration: ',it)
-    for i in range(3):
+    for i in range(4):
         # Seleciona uma amostra aleatória da base de dados
         x, d = x, d = choice(training_data)
         # Realiza a operação de soma do perceptron
@@ -57,7 +57,7 @@ while MSE > STOP or it == 0:
         w += a * e * x
         # Imprime os dados
         # Apresenta os resultados 
-        print("{}: {} -> {} \t [e = {}]".format(x, sum, y, e))
+        print("{} {}: {} -> {} \t [e = {}]".format(x, w, sum, y, e))
     # Apos treinar com toda base de dados calcula o MSE
     print('--- Calcula o erro quadrático médio')
     MSE = 0
