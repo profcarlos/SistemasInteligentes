@@ -1,3 +1,6 @@
+Disponível em: https://aimatters.wordpress.com/2016/01/11/solving-xor-with-a-neural-network-in-python/
+	
+
 import numpy as np
 import math
 import time
