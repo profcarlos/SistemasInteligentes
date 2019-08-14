@@ -1,5 +1,13 @@
-Disponível em: https://aimatters.wordpress.com/2016/01/11/solving-xor-with-a-neural-network-in-python/
-	
+'''
+Curso: Engenharia Elétrica
+Disciplina: Sistemas Inteligentes
+Professor: Carlos Roberto Jr
+Título: Algoritmo da rede MLP para solução do problema XOR
+Observações:
+Maiores informações disponível em:
+https://aimatters.wordpress.com/2016/01/11/solving-xor-with-a-neural-network-in-python/
+  
+'''
 
 import numpy as np
 import math
