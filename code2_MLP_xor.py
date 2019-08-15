@@ -11,7 +11,7 @@ https://aimatters.wordpress.com/2016/01/11/solving-xor-with-a-neural-network-in-
 
 import numpy as np
 import math
-from time import process_time
+import time
 import sys
 
 def sigmoid(x):
@@ -89,7 +89,7 @@ learning_rate = 0.01
 [THETA1, THETA2, J] = xor_nn(XOR, 0, 0, 1, 1, learning_rate)
 
 t_start = process_time()
-for i in range(1, 100000):
+for i in range(1, 2):
     [THETA1, THETA2, J] = xor_nn(XOR, THETA1, THETA2, 0, 1, learning_rate);
     # Print results at the moment
     if (i%10 == 0):
@@ -99,11 +99,11 @@ for i in range(1, 100000):
     if (J <= 0.1):
         print('\n-------------------- Stoping process : J = {}' .format(J))
         [THETA1, THETA2] = xor_nn(XOR, THETA1, THETA2);
-        t_end = process_time()
+        t_end = time.clock()
         print('--- Elapsed time ', t_end - t_start, ' s')
         sys.exit()
 print('\n-------------------- Finish Iteration ')
 [THETA1, THETA2] = xor_nn(XOR, THETA1, THETA2);
 
-t_end = process_time()
+t_end = time.clock()
 print('--- Elapsed time ', t_end - t_start, ' s')
