@@ -101,7 +101,7 @@ for i in range(1, 100000):
         [THETA1, THETA2] = xor_nn(XOR, THETA1, THETA2);
         t_end = process_time()
         print('--- Elapsed time ', t_end - t_start, ' s')
-        exit
+        sys.exit()
 print('\n-------------------- Finish Iteration ')
 [THETA1, THETA2] = xor_nn(XOR, THETA1, THETA2);
 
