@@ -11,8 +11,8 @@ https://aimatters.wordpress.com/2016/01/11/solving-xor-with-a-neural-network-in-
 
 import numpy as np
 import math
-import time
-
+from time import process_time
+import sys
 
 def sigmoid(x):
     # Calc sigmoid function
@@ -48,48 +48,62 @@ def xor_nn(XOR, THETA1, THETA2, init_w=0, learn=0, alpha=0.01):
 		A2 = np.vstack(([1], sigmoid(Z2)))
 		Z3 = np.dot(THETA2, A2)
 		h = sigmoid(Z3)
-		print("---------- FEEDFORWARD PROCESS")
-		print("A1: {} out: {} THETA1: {} Z2: {}".format(np.transpose(A1), [x[2]], np.transpose(THETA1), np.transpose(Z2)))
-		print("A2: {} THETA2: {} Z3: {} h: {}".format(np.transpose(A2), np.transpose(THETA2), [Z3], [h]))
+		print("\n---------- FEEDFORWARD PROCESS")
+		print("A1: {} out: {} \nTHETA1: {} Z2: {}".format(np.transpose(A1), [x[2]], np.transpose(THETA1), np.transpose(Z2)))
+		print("A2: {} THETA2: {}\nZ3: {} h: {}".format(np.transpose(A2), THETA2, Z3, h))
         # Calc the cost of iteration
 		J = J + (x[2] * math.log(h[0])) + ((1 - x[2]) * math.log(1 - h[0]));
         #We’ll use “m” to record the number of training examples that we present to the network in the epoch
 		m = m + 1;
         #Its the BACKWARD PROCESS, not used when its necessary only calc network response
 		if learn == 1:
+            # Its error of sample: calculed minus expected
 			delta3 = h - x[2]
+            # Its derivated erro about input
+            # Used [1:] for ignore bias weight
 			delta2 = (np.dot(np.transpose(THETA2), delta3) * (A2 * (1 - A2)))[1:]
 			T2_DELTA = T2_DELTA + np.dot(delta3, np.transpose(A2))
 			T1_DELTA = T1_DELTA + np.dot(delta2, np.transpose(A1))
-			print("---------- BACKWARD PROCESS")
-			print("delta3: {}\tdelta2: {}\t T2_DELTA: {}\t T1_DELTA:{}\t".format(np.transpose(delta3), np.transpose(delta2), T2_DELTA, T1_DELTA))
+			print("\n---------- BACKWARD PROCESS")
+			print("delta3: {}\tdelta2: {}\t\nT2_DELTA: {}\t T1_DELTA:{}\t".format(np.transpose(delta3), np.transpose(delta2), T2_DELTA, T1_DELTA))
 		else:
 			#If we’re not learning from this example, then we simply display the cost of this particular example
-			print("Hypothesis for {} is {}".format(A1, h));
+			print("Hypothesis for {} is {}".format(np.transpose(A1), h));
     # Now we calculate the average cost across all the examples
 	J = J / -m
     # Lastly, we’ll set the return values as our new updated weights
 	if learn == 1:
 		THETA1 = THETA1 - (alpha * (T1_DELTA / m))
 		THETA2 = THETA2 - (alpha * (T2_DELTA / m))
-		print("THETA1: {}\tTHETA2: {}".format(THETA1, THETA2))
+		print("THETA1: {} THETA2: {} J: {}".format(THETA1, THETA2, J))
+		return (THETA1, THETA2, J)
 	else:
 		print("J: {}".format(J))
-
-	return (THETA1, THETA2)
+		return (THETA1, THETA2)
 
 # Its XOR table data
 XOR = np.array([[0,0,0], [0,1,1], [1,0,1], [1,1,0]])
+# Its learning rate of neural network
+learning_rate = 0.01
 # Start variables of neural network
-THETA1, THETA2 = xor_nn(XOR, 0, 0, 1, 1, 0.01)
+[THETA1, THETA2, J] = xor_nn(XOR, 0, 0, 1, 1, learning_rate)
 
-t_start = time.process_time()
-for i in range(1, 2):
-    [THETA1, THETA2] = xor_nn(XOR, THETA1, THETA2, 0, 1, 0.01);
-    if (1): # Use this for much iterations: (i%1000 == 0):
-        print('-------------------- Iteration : {}' .format(i, prec=3))
+t_start = process_time()
+for i in range(1, 100000):
+    [THETA1, THETA2, J] = xor_nn(XOR, THETA1, THETA2, 0, 1, learning_rate);
+    # Print results at the moment
+    if (i%10 == 0):
+        print('\n-------------------- Iteration : {}' .format(i))
         [THETA1, THETA2] = xor_nn(XOR, THETA1, THETA2);
+    # Exit because J cost is very small
+    if (J <= 0.1):
+        print('\n-------------------- Stoping process : J = {}' .format(J))
+        [THETA1, THETA2] = xor_nn(XOR, THETA1, THETA2);
+        t_end = process_time()
+        print('--- Elapsed time ', t_end - t_start, ' s')
+        exit
+print('\n-------------------- Finish Iteration ')
+[THETA1, THETA2] = xor_nn(XOR, THETA1, THETA2);
 
-
-t_end = time.process_time()
-print('--- Elapsed time ', t_end - t_start)
+t_end = process_time()
+print('--- Elapsed time ', t_end - t_start, ' s')
