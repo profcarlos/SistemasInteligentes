@@ -1,3 +1,4 @@
+   
 '''
 Curso: Engenharia Elétrica
 Disciplina: Sistemas Inteligentes
@@ -28,6 +29,7 @@ test_data = [
 ]
 # Define variável peso com valores aleatorios
 w = random.rand(2)/2 -0.5
+
 # Define a taxa de aprendizagem
 a = 0.2
 # Define o critério de parada
@@ -46,18 +48,21 @@ while MSE > STOP or it == 0:
     print('---------- Iteration: ',it)
     for i in range(4):
         # Seleciona uma amostra aleatória da base de dados
-        x, d = x, d = choice(training_data)
+        x, d = choice(training_data)
         # Realiza a operação de soma do perceptron
         sum = dot(w, x)
         # Aplica a somatória na função de ativação
         y = unit_step(sum)
         # Calcula o erro
         e = d - y
+        # Imprime os dados
+        print("x: {} w: {} sum: {} -> y: {} e: {}".format(x, w, sum, y, e))
         # Realiza o ajuste dos pesos do perceptron
         w += a * e * x
-        # Imprime os dados
+        # Imprime o peso corrigido
+        print('w : {}'.format(w))
         # Apresenta os resultados 
-        print("{} {}: {} -> {} \t [e = {}]".format(x, w, sum, y, e))
+        
     # Apos treinar com toda base de dados calcula o MSE
     print('--- Calcula o erro quadrático médio')
     MSE = 0
