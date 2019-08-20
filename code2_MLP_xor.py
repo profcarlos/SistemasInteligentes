@@ -57,15 +57,16 @@ def xor_nn(XOR, THETA1, THETA2, init_w=0, learn=0, alpha=0.01):
 		m = m + 1;
         #Its the BACKWARD PROCESS, not used when its necessary only calc network response
 		if learn == 1:
-            # Its error of sample: calculed minus expected
-			delta3 = h - x[2]
+            # Its error of sample: expected - calculed
+			error = x[2] - h
+			delta3 = h*(1 - h)*error
             # Its derivated erro about input
             # Used [1:] for ignore bias weight
 			delta2 = (np.dot(np.transpose(THETA2), delta3) * (A2 * (1 - A2)))[1:]
 			T2_DELTA = T2_DELTA + np.dot(delta3, np.transpose(A2))
 			T1_DELTA = T1_DELTA + np.dot(delta2, np.transpose(A1))
 			print("\n---------- BACKWARD PROCESS")
-			print("delta3: {}\tdelta2: {}\t\nT2_DELTA: {}\t T1_DELTA:{}\t".format(np.transpose(delta3), np.transpose(delta2), T2_DELTA, T1_DELTA))
+			print("error: {} delta3: {}\tdelta2: {}\t\nT2_DELTA: {}\t T1_DELTA:{}\t".format(error, np.transpose(delta3), np.transpose(delta2), T2_DELTA, T1_DELTA))
 		else:
 			#If we’re not learning from this example, then we simply display the cost of this particular example
 			print("Hypothesis for {} is {}".format(np.transpose(A1), h));
@@ -88,8 +89,8 @@ learning_rate = 0.01
 # Start variables of neural network
 [THETA1, THETA2, J] = xor_nn(XOR, 0, 0, 1, 1, learning_rate)
 
-t_start = process_time()
-for i in range(1, 2):
+t_start = time.clock()
+for i in range(1, 100000):
     [THETA1, THETA2, J] = xor_nn(XOR, THETA1, THETA2, 0, 1, learning_rate);
     # Print results at the moment
     if (i%10 == 0):
