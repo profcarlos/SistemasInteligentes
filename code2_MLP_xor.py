@@ -74,8 +74,8 @@ def xor_nn(XOR, THETA1, THETA2, init_w=0, learn=0, alpha=0.01):
 	J = J / -m
     # Lastly, we’ll set the return values as our new updated weights
 	if learn == 1:
-		THETA1 = THETA1 - (alpha * (T1_DELTA / m))
-		THETA2 = THETA2 - (alpha * (T2_DELTA / m))
+		THETA1 = THETA1 + (alpha * (T1_DELTA / m))
+		THETA2 = THETA2 + (alpha * (T2_DELTA / m))
 		print("THETA1: {} THETA2: {} J: {}".format(THETA1, THETA2, J))
 		return (THETA1, THETA2, J)
 	else:
@@ -88,23 +88,27 @@ XOR = np.array([[0,0,0], [0,1,1], [1,0,1], [1,1,0]])
 learning_rate = 0.01
 # Start variables of neural network
 [THETA1, THETA2, J] = xor_nn(XOR, 0, 0, 1, 1, learning_rate)
-
+J_cost = []
 t_start = time.clock()
-for i in range(1, 100000):
+for i in range(1, 10000):
     [THETA1, THETA2, J] = xor_nn(XOR, THETA1, THETA2, 0, 1, learning_rate);
+    J_cost.append(J)
     # Print results at the moment
     if (i%10 == 0):
         print('\n-------------------- Iteration : {}' .format(i))
         [THETA1, THETA2] = xor_nn(XOR, THETA1, THETA2);
+        
     # Exit because J cost is very small
     if (J <= 0.1):
         print('\n-------------------- Stoping process : J = {}' .format(J))
         [THETA1, THETA2] = xor_nn(XOR, THETA1, THETA2);
         t_end = time.clock()
+        print("J_cost: {}".format(J_cost))
         print('--- Elapsed time ', t_end - t_start, ' s')
         sys.exit()
 print('\n-------------------- Finish Iteration ')
 [THETA1, THETA2] = xor_nn(XOR, THETA1, THETA2);
 
 t_end = time.clock()
+print("J_cost: {}".format(J_cost))
 print('--- Elapsed time ', t_end - t_start, ' s')
