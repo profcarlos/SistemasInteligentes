@@ -66,7 +66,7 @@ def xor_nn(XOR, Wij, Wjk, init_w=0, learn=0, alpha=0.01):
 			sum_delta_k += np.dot(delta_k, np.transpose(Yj))
 			sum_delta_j += np.dot(delta_j, np.transpose(Xi))
 			print("\n---------- BACKWARD PROCESS")
-			print("error: {} delta3: {}\tdelta2: {}\t\nT2_DELTA: {}\t T1_DELTA:{}\t".format(error, np.transpose(delta3), np.transpose(delta2), T2_DELTA, T1_DELTA))
+			print("error: {} delta_k: {}\tdelta_j: {}\t\nsum_delta_k: {}\t sum_delta_j:{}\t".format(error, np.transpose(delta_k), np.transpose(delta_j), sum_delta_k, sum_delta_j))
 		else:
 			#If we’re not learning from this example, then we simply display the cost of this particular example
 			print("Hypothesis for {} is {}".format(np.transpose(Xi), Yk));
