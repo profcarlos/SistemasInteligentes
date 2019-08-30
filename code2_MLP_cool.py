@@ -83,7 +83,7 @@ learning_rate = 0.1
 MSE_sample = []
 t_start = time.clock()
 # Se python 3 use t_start = time.perf_counter()
-for i in range(1, 100):
+for i in range(1, 100000):
 	if(i == 1):
 		print('\n-------------------- Iteration : {}' .format(1))
 	[Wij, Wjk, MSE] = xor_nn(XOR, Wij, Wjk, 0, 1, learning_rate)
@@ -96,7 +96,7 @@ for i in range(1, 100):
 		MSE_sample.append([i, MSE])
 		np.savetxt('d:\\iter_data.csv', MSE_sample, delimiter = ',', fmt = ['%d', '%.4f'])		
 	# Exit case MSE <= threshold
-	if (MSE <= 0.01):
+	if (MSE <= 0.001):
 		print('\n-------------------- Stoping process in Iteration: {} MSE = {}' .format(i, MSE))
 		[Wij, Wjk] = xor_nn(XOR, Wij, Wjk);
 		t_end = time.clock()
