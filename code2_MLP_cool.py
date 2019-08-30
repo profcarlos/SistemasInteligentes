@@ -80,30 +80,33 @@ XOR = np.array([[0,0,0], [0,1,1], [1,0,1], [1,1,0]])
 learning_rate = 0.1
 # Start variables of neural network
 [Wij, Wjk, MSE] = xor_nn(XOR, 0, 0, 1, 1, learning_rate)
-MSE_samples = []
+MSE_sample = []
 t_start = time.clock()
-for i in range(1, 10000):
+# Se python 3 use t_start = time.perf_counter()
+for i in range(1, 100):
 	if(i == 1):
 		print('\n-------------------- Iteration : {}' .format(1))
 	[Wij, Wjk, MSE] = xor_nn(XOR, Wij, Wjk, 0, 1, learning_rate)
-	# Save epoch MSE 
-	MSE_samples.append(MSE)
+
 	# Print results at the moment
 	if (i%10 == 0):
 		print('\n-------------------- Iteration : {}' .format(i))
 		[Wij, Wjk] = xor_nn(XOR, Wij, Wjk);
-		
+		# Save epoch MSE 
+		MSE_sample.append([i, MSE])
+		np.savetxt('d:\\iter_data.csv', MSE_sample, delimiter = ',', fmt = ['%d', '%.4f'])		
 	# Exit case MSE <= threshold
 	if (MSE <= 0.01):
 		print('\n-------------------- Stoping process in Iteration: {} MSE = {}' .format(i, MSE))
 		[Wij, Wjk] = xor_nn(XOR, Wij, Wjk);
 		t_end = time.clock()
-		print("MSE_samples: {}".format(MSE_samples))
+		# Se python 3 use t_end = time.perf_counter()
 		print('--- Elapsed time ', t_end - t_start, ' s')
 		sys.exit()
+		# Se python 3 Instale a biblioteca. No command use: pip install sys
 print('\n-------------------- Finish in Iteration: {}'.format(i))
 [Wij, Wjk] = xor_nn(XOR, Wij, Wjk);
 
 t_end = time.clock()
-print("MSE_samples: {}".format(MSE_samples))
+# Se python 3 use t_end = time.perf_counter()
 print('--- Elapsed time ', t_end - t_start, ' s')
