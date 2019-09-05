@@ -1,6 +1,6 @@
+# https://gist.github.com/sevamoo/035c56e7428318dd3065013625f12a11
+
 import matplotlib.pylab as plt
-# matplotlib inline
-# import sompy as sompy
 import pandas as pd
 import numpy as np
 from time import time
