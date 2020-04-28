@@ -1,4 +1,4 @@
-# Sistemas-Inteligentes
+# Sistemas Inteligentes
 
 Rotinas da disciplina de Sistemas Inteligentes. Engenharia Elétrica. IFG Campus Goiânia.
 
