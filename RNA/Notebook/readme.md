@@ -8,4 +8,6 @@ Veja os primeiros passos neste tutorial:
 
 https://letscode-academy.com/blog/introducao-ao-jupyter-notebook/
 
+![](jupyter.png)
+
 Caso tenha dúvidas reporte pelo email carlos.junior@ifg.edu.br
