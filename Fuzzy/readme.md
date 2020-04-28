@@ -7,7 +7,3 @@ Veja demonstração do controle de velocidade de deslocamento baseado na distân
 https://www.youtube.com/watch?v=oRjFIVqer4o
 
 ![](robo.png)
-
-
-
-
