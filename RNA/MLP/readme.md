@@ -6,6 +6,6 @@ Nesta pasta serão encontradas rotinas básicas para desenvolvimento de Redes Ne
 
 A figura a seguir apresenta um modelo de RNA MLP.
 
-![](rede.png)
+![](RNA MLP.png)
 
 Caso tenha dúvidas reporte pelo email carlos.junior@ifg.edu.br
