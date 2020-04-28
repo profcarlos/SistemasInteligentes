@@ -1,4 +1,4 @@
-# Mapas AutoOrganizáveis - Sistemas Inteligentes
+# Redes Neurais Artificiais - Sistemas Inteligentes
 
 Rotinas da disciplina de Sistemas Inteligentes. Engenharia Elétrica. IFG Campus Goiânia.
 
@@ -9,5 +9,11 @@ Veja os primeiros passos neste tutorial:
 https://letscode-academy.com/blog/introducao-ao-jupyter-notebook/
 
 ![](jupyter.png)
+
+Conheça também a biblioteca Tensorflowe seus recursos para uso de Redes Neurais
+
+https://www.tensorflow.org/
+
+![](tensorflow.png)
 
 Caso tenha dúvidas reporte pelo email carlos.junior@ifg.edu.br
